@@ -37,7 +37,11 @@ import {
   tdArray
 } from "variables/Variables.jsx";
 
+
 class Dashboard extends Component {
+
+
+
   createLegend(json) {
     var legend = [];
     for (var i = 0; i < json["names"].length; i++) {
@@ -48,7 +52,10 @@ class Dashboard extends Component {
     }
     return legend;
   }
+
+
   render() {
+
     return (
       <div className="content">
         <Grid fluid>
@@ -84,6 +91,22 @@ class Dashboard extends Component {
               />
             </Col>
           </Row>
+
+          {(() => {
+            if (process.env.REACT_APP_ENV==='dev') {
+              return (
+                <Row id="devInfo" className="alert-success">
+                  <Col md={12} className="p-4">
+                    <h3>Dev Info (does not show in production)</h3>
+                    Stripe Test Key: {process.env.REACT_APP_STRIPE_TEST_PUBLISHABLE}
+                    {console.log("Stripe API KEY: " + process.env.REACT_APP_STRIPE_TEST_PUBLISHABLE)}
+                  </Col>
+
+                </Row>
+              )
+            }
+          })()
+        }
 
 
         </Grid>

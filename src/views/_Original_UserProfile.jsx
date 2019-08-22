@@ -30,7 +30,7 @@ import { FormInputs } from "components/FormInputs/FormInputs.jsx";
 import { UserCard } from "components/UserCard/UserCard.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
 
-import avatar from "assets/img/faces/michael-beach-2.jpg";
+import avatar from "assets/img/faces/face-3.jpg";
 
 class UserProfile extends Component {
   render() {
@@ -135,8 +135,8 @@ class UserProfile extends Component {
                             rows="5"
                             componentClass="textarea"
                             bsClass="form-control"
-                            placeholder="placeholder description"
-                            defaultValue="My first test account"
+                            placeholder="Here can be your description"
+                            defaultValue="Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."
                           />
                         </FormGroup>
                       </Col>
@@ -153,14 +153,15 @@ class UserProfile extends Component {
               <UserCard
                 bgImage="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400"
                 avatar={avatar}
-                name="Michael Cummings"
-                userName="michaelcummings"
+                name="Mike Andrew"
+                userName="michael24"
                 description={
                   <span>
-                    "My first
+                    "Lamborghini Mercy
                     <br />
-                    test account"
-
+                    Your chick she so thirsty
+                    <br />
+                    I'm in that two seat Lambo"
                   </span>
                 }
                 socials={
