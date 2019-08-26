@@ -93,6 +93,10 @@ class Admin extends Component {
       }
     });
   };
+
+  // Return the page name based on the Routes.js file
+  // If it does not match anything in Routes.js then it will
+  // be set to the default return.
   getBrandText = path => {
     for (let i = 0; i < routes.length; i++) {
       if (
@@ -121,6 +125,8 @@ class Admin extends Component {
       this.setState({ fixedClasses: "dropdown" });
     }
   };
+
+  // Mount NotificationSystem component
   componentDidMount() {
     this.setState({ _notificationSystem: this.refs.notificationSystem });
     var _notificationSystem = this.refs.notificationSystem;
@@ -142,6 +148,7 @@ class Admin extends Component {
       default:
         break;
     }
+    // add default notification to the system upon mounting
     _notificationSystem.addNotification({
       title: <span data-notify="icon" className="pe-7s-gift" />,
       message: (
@@ -169,6 +176,7 @@ class Admin extends Component {
       this.refs.mainPanel.scrollTop = 0;
     }
   }
+
   render() {
     return (
       <div className="wrapper">
