@@ -23,25 +23,16 @@ import { NavItem, Nav, NavDropdown, MenuItem, Button } from "react-bootstrap";
 class AdminNavbarLinks extends Component {
   constructor(props) {
     super(props);
-    this.addNotification = this.addNotification.bind(this);
+    //this.addNotification = this.addNotification.bind(this);
   }
 
 
-  addNotification() {
-    console.log('Notification Button Clicked');
-  }
+
 
 
 
   render() {
-    const notification = (
-      <div>
-        <i className="fa fa-globe" />
-        <b className="caret" />
-        <span className="notification">5</span>
-        <p className="hidden-lg hidden-md">Notification</p>
-      </div>
-    );
+    
     return (
       <div>
         <Nav>
@@ -52,7 +43,7 @@ class AdminNavbarLinks extends Component {
           </NavItem>
         </Nav>
         <Nav pullRight>
-          <Button variant="primary" onClick={this.addNotification()}>Add Notification</Button>
+          <Button variant="primary" >Add Notification</Button>
           <Button>Create New Account</Button>
         </Nav>
       </div>

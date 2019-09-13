@@ -32,7 +32,7 @@ class Footer extends Component {
           </nav>
           <p className="copyright pull-right">
             &copy; {new Date().getFullYear()}{" "}
-            <a href="#">
+            <a href="/#">
               DNA
             </a>
 
