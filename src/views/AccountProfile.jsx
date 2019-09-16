@@ -39,8 +39,10 @@ import avatar from "assets/img/faces/michael-beach-2.jpg";
 class AccountProfile extends Component {
   constructor(props) {
     super(props);
-    this.state = {account: [],
-                  test: "this is a test state" };
+    this.state = {
+      account: [],
+      test: "this is a test state"
+    };
 
 
   }
@@ -49,20 +51,27 @@ class AccountProfile extends Component {
       this.setState({ loading:true });
 
       let res = await axios.get(
-        `http://localhost:4000/api/accounts/5d6ea4651c9d4400001ba466` )
+        `http://localhost:4000/api/accounts/${id}` )
       let data = res.data;
       console.log("res.data: " + JSON.stringify(res.data));
-      console.log("data: " + data);
+      console.log("data: ", data);
 
-      this.setState({ account: data,
-                      loading: false });
+      this.setState({
+        account: data,
+        loading: false
+      });
   }
 
   componentDidMount() {
+    if (!this.props.isAuthenticated) {
+      this.props.history.replace('/');
+    }
+
     console.log("AccountProfile Mounted: ");
     console.log(this.props.match.params.slug);
+    // TODO: Use this code below once userQueryById contains the id-hash of user
+    // this.getAccount(this.props.location.state.userQueryById);
     this.getAccount("5d6ec89d1c9d4400001ba468");
-
   }
 
   render() {
@@ -186,7 +195,7 @@ class AccountProfile extends Component {
               <UserCard
                 bgImage="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400"
                 avatar={avatar}
-                name="Michael Cummings"
+                name={this.state.account.account_name}
                 userName="michaelcummings"
                 description={
                   <span>
@@ -217,5 +226,6 @@ class AccountProfile extends Component {
     );
   }
 }
+
 
 export default AccountProfile;

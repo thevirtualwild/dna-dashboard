@@ -32,62 +32,22 @@ import {
   dataBar,
   optionsBar,
   responsiveBar,
-  legendBar
+  legendBar,
+  thArray,
+  tdArray
 } from "variables/Variables.jsx";
-import axios from "axios";
-
-
-
-const thArray = ["Account Name","Account ID", "Status", "Code", "Actions"];
-const tdArray = [
-  ["1", "Dakota Rice", "$36,738", "Niger", "Oud-Turnhout"],
-  ["2", "Minerva Hooper", "$23,789", "Curaçao", "Sinaai-Waas"],
-  ["3", "Sage Rodriguez", "$56,142", "Netherlands", "Baileux"],
-  ["4", "Philip Chaney", "$38,735", "Korea, South", "Overland Park"],
-  ["5", "Doris Greene", "$63,542", "Malawi", "Feldkirchen in Kärnten"],
-  ["6", "Mason Porter", "$78,615", "Chile", "Gloucester"]
-];
-
 
 
 class Dashboard extends Component {
-
   constructor(props) {
     super(props);
-    this.state = {
-      accounts: []
-    }
-
-
   }
-  // state = {
-  //   accounts: []
-  // };
 
   componentDidMount() {
-    this.getAccounts();
+    // if (!this.props.isAuthenticated) {
+    //   this.props.history.replace('/');
+    // }
   }
-
-  getAccounts = async () => {
-    try {
-      let res = await axios.get("http://localhost:4000/api/accounts");
-      //console.log("res: " + JSON.stringify(res) ); //WORKS
-
-      let { data } = res.data;
-
-      this.setState({ accounts: data });
-
-    } catch (err) {
-
-      console.log(err.response);
-      //reject(err);
-    }
-
-
-
-  };
-
-
 
   createLegend(json) {
     var legend = [];
@@ -100,8 +60,13 @@ class Dashboard extends Component {
     return legend;
   }
 
-
-
+  browseUser(userProp) {
+    console.log('USER PROP: ', userProp);
+    this.props.history.push({
+      pathname: `/admin/account/${userProp[0]}`,
+      state: { userQueryById: userProp[1] }
+    });
+  }
 
   render() {
 
@@ -127,7 +92,8 @@ class Dashboard extends Component {
                     <tbody>
                       {tdArray.map((prop, key) => {
                         return (
-                          <tr key={key}>
+                          <tr key={key}
+                              onClick={((e) => this.browseUser(prop, e))}>
                             {prop.map((prop, key) => {
                               return <td key={key}>{prop}</td>;
                             })}
@@ -141,12 +107,6 @@ class Dashboard extends Component {
             </Col>
           </Row>
 
-          <Row>
-            <Col md={12}>
-              { this.getAccounts }
-            </Col>
-          </Row>
-
           {(() => {
             if (process.env.REACT_APP_ENV==='dev') {
               return (
@@ -154,10 +114,7 @@ class Dashboard extends Component {
                   <Col md={12} className="p-4">
                     <h3>Dev Info (does not show in production)</h3>
                     Stripe Test Key: {process.env.REACT_APP_STRIPE_TEST_PUBLISHABLE}
-                    {
-                      console.log("Stripe API KEY: " + process.env.REACT_APP_STRIPE_TEST_PUBLISHABLE)}
-                      {console.log(this.state.accounts)}
-
+                    {console.log("Stripe API KEY: " + process.env.REACT_APP_STRIPE_TEST_PUBLISHABLE)}
                   </Col>
 
                 </Row>
@@ -172,5 +129,6 @@ class Dashboard extends Component {
     );
   }
 }
+
 
 export default Dashboard;
